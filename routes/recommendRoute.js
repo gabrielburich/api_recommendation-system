@@ -1,7 +1,7 @@
 import {responseError} from "../libs/responseUtils";
 
 module.exports = server => {
-    server.route('/restaurant')
+    server.route('/recommend')
         .all(server.auth.authenticate())
         .get((req, res) => {
             const reqParams = JSON.parse(req.query.params);
