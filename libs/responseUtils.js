@@ -1,4 +1,5 @@
 export function responseError(error, res, code = 501) {
+    console.error(error);
     res.status(code).send({msg: error.message});
 }
 

@@ -6,7 +6,8 @@
   "author": "Gabriel Burich",
   "private": true,
   "scripts": {
-    "start": "nodemon start.js"
+    "start": "nodemon start.js",
+    "start-node": "node start.js"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",

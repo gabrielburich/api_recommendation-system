@@ -6,7 +6,7 @@ module.exports = server => {
         .all(server.auth.authenticate())
         .get((req, res) => {
             const restaurantPromise = server.db.one('select * from restaurant_information WHERE id = $1;', [req.params.id]);
-            const mealsPromise = server.db.many('select * from meal WHERE restaurant_id =$1;', [req.params.id]);
+            const mealsPromise = server.db.manyOrNone('select * from meal WHERE restaurant_id =$1;', [req.params.id]);
 
             Promise.all([restaurantPromise, mealsPromise])
                 .then(data => {
