@@ -1,9 +1,14 @@
-import {responseCreate, responseError} from "../libs/responseUtils";
+import {responseCreate, responseError, responseHttpOk} from "../libs/responseUtils";
 
 module.exports = server => {
 
     server.route('/order')
         .all(server.auth.authenticate())
+        .get((req, res) => {
+            server.db.manyOrNone('SELECT * FROM order_information WHERE "userId" = $1;', [req.user.id])
+                .then(data => responseHttpOk(data, res))
+                .catch(error => responseError(error, res));
+        })
         .post((req, res) => {
             const {restaurantId, meal, filter} = req.body;
             const {acceptsMealVoucher, typeRestaurantId, orderTime, distance, typeOrderId, sitPlace} = filter;
